@@ -3,7 +3,13 @@ import pandas as pd
 import mysql.connector
 
 def connect_2_sql():
-    cnx = mysql.connector.connect(user="root", password="zzzz", host= "127.0.0.1", database="gpa_db")
+    cnx = mysql.connector.connect(
+        host=st.secrets["mysql"]["host"],
+        user=st.secrets["mysql"]["user"],
+        password=st.secrets["mysql"]["password"],
+        database=st.secrets["mysql"]["database"],
+        port=st.secrets["mysql"]["port"]
+    )
     return cnx
 
 def save(data):
@@ -147,3 +153,4 @@ if (sem > 1 and sub) or (sem == 1 and submitted):
         columns=["Credits", "Grade"]
     )
     st.dataframe(df, use_container_width=True)
+
